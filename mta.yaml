@@ -14,6 +14,15 @@ modules:
     requires:
      - name: hdi_db
 
+
+  - name: core_xsjs
+    type: nodejs
+    path: core_xsjs
+    provides:
+     - name: core_xsjs_api
+       properties:
+          url: ${default-url}
+
 resources:
   - name: UAA-service
     type: com.sap.xs.uaa-space
