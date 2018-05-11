@@ -5,11 +5,14 @@
 	  "source": "(.*)(.xsjs)",
 	  "destination": "core-xsjs-backend",
 	  "csrfProtection": false,
-	  "authenticationType": "xsuaa"
+	  "authenticationType": "basic"
 	}, {
 	  "source": "(.*)(.xsodata)",
 	  "destination": "core-xsjs-backend",
-	  "authenticationType": "xsuaa"
-	
+	  "authenticationType": "basic"
+	}, {
+	  "source": "(.*)(.html)",
+	  "localDir": "resources",
+	  "authenticationType": "basic"
 	}]
 }
