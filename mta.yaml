@@ -5,6 +5,9 @@ modules:
   - name: po-web
     type: html5
     path: web
+    parameters:
+      memory: 256M
+      disk-quota: 256M
     requires:
       - name: po-UAA-service
       - name: core_xsjs_api
@@ -13,14 +16,31 @@ modules:
           name: core-xsjs-backend
           url: '~{url}'
           forwardAuthToken: true
+      - name: po-ui5
   - name: po-db
     type: hdb
     path: db
     requires:
       - name: po-hdi_db
+        properties:
+          TARGET_CONTAINER: ~{hdi-container-name}
+
+  
+      - name: cross-container-service-1
+        group: SERVICE_REPLACEMENTS
+
+        properties:
+          key: ServiceName_1
+          service: ~{the-service-name}
+                            
+
+
   - name: po-core_xsjs
     type: nodejs
     path: core_xsjs
+    parameters:
+      memory: 256M
+      disk-quota: 1024M
     provides:
       - name: core_xsjs_api
         properties:
@@ -41,3 +61,16 @@ resources:
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
+  - name: po-ui5
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: sapui5_sb
+      service-plan: sapui5-1.71
+
+  - name: cross-container-service-1
+    parameters:
+       service-name: CROSS_SCHEMA_PRODUCTS
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+
