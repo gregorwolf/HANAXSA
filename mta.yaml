@@ -17,6 +17,7 @@ modules:
           url: '~{url}'
           forwardAuthToken: true
       - name: po-ui5
+
   - name: po-db
     type: hdb
     path: db
@@ -25,15 +26,11 @@ modules:
         properties:
           TARGET_CONTAINER: ~{hdi-container-name}
 
-  
       - name: cross-container-service-1
         group: SERVICE_REPLACEMENTS
-
         properties:
           key: ServiceName_1
-          service: ~{the-service-name}
-                            
-
+          service: ~{products-service-name}
 
   - name: po-core_xsjs
     type: nodejs
@@ -68,9 +65,9 @@ resources:
       service-plan: sapui5-1.71
 
   - name: cross-container-service-1
+    type: org.cloudfoundry.existing-service
     parameters:
        service-name: CROSS_SCHEMA_PRODUCTS
     properties:
-       the-service-name: ${service-name}
-    type: org.cloudfoundry.existing-service
+       products-service-name: ${service-name}
 
