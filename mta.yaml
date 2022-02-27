@@ -2,23 +2,23 @@ ID: HANAXSA
 _schema-version: '2.0'
 version: 0.0.3
 modules:
-  - name: web
+  - name: po-web
     type: html5
     path: web
     requires:
-      - name: UAA-service
+      - name: po-UAA-service
       - name: core_xsjs_api
         group: destinations
         properties:
           name: core-xsjs-backend
           url: '~{url}'
           forwardAuthToken: true
-  - name: db
+  - name: po-db
     type: hdb
     path: db
     requires:
-      - name: hdi_db
-  - name: core_xsjs
+      - name: po-hdi_db
+  - name: po-core_xsjs
     type: nodejs
     path: core_xsjs
     provides:
@@ -26,18 +26,18 @@ modules:
         properties:
           url: '${default-url}'
     requires:
-      - name: UAA-service
-      - name: hdi_db
-      - name: db
+      - name: po-UAA-service
+      - name: po-hdi_db
+      - name: po-db
 resources:
-  - name: UAA-service
+  - name: po-UAA-service
     type: com.sap.xs.uaa-space
     parameters:
       config-path: ./xs-security.json
-  - name: hdi_db
+  - name: po-hdi_db
     parameters:
       config:
-        schema: DB
+        schema: PODB
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
