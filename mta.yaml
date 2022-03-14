@@ -70,4 +70,3 @@ resources:
        service-name: CROSS_SCHEMA_PRODUCTS
     properties:
        products-service-name: ${service-name}
-
