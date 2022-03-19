@@ -1,0 +1,12 @@
+###
+GET {{$dotenv serverbaseurl}}
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+###
+GET {{$dotenv serverbaseurl}}/xsodata/purchaseOrder.xsodata
+Accept: application/json
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+###
+GET {{$dotenv serverbaseurl}}/xsodata/purchaseOrder.xsodata/POHeader
+  ?$expand=POItem
+Accept: application/json
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
